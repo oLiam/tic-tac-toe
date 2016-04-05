@@ -1,13 +1,4 @@
 function setMove(boxId) {
-    //if (document.getElementById(boxId).innerHTML == 'O') {
-    //    alert('Al bezet');
-    //    return;
-    //}
-    //
-    //if (document.getElementById(boxId).innerHTML == '') {
-    //    document.getElementById(boxId).innerHTML = 'O';
-    //}
-
     // X or O moet nog toegevoegd worden.
     io.socket.post('/set', {boxId: boxId}, function (resData, jwres) {
 
@@ -45,9 +36,12 @@ function check() {
 }
 
 io.socket.on('setMove', function (data){
-    document.getElementById(data.boxId).innerHTML = data.role;
-console.log(req.session.id);
-    if(data.userSet == req.session.id) {
-        alert('alasdfas');
+    if(data.role == 'O') {
+    document.getElementById('turn').innerHTML = 'X';
     }
+    else {
+        document.getElementById('turn').innerHTML = 'O';
+    }
+    
+    document.getElementById(data.boxId).innerHTML = data.role;
 });

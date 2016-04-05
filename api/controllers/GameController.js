@@ -16,13 +16,13 @@ module.exports = {
         var gameName = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 4);
         GameService.create(gameName);
 
-        sails.sockets.blast('newGame', { name: gameName });
+        sails.sockets.blast('newGame', {name: gameName});
     },
 
     join: function (req, res) {
         req.session.gameName = req.body.gameName;
 
-        sails.sockets.join(req, req.body.gameName,  function(err) {
+        sails.sockets.join(req, req.body.gameName, function (err) {
             if (err) {
                 return res.serverError(err);
             }
@@ -38,8 +38,13 @@ module.exports = {
 
         var role = GameService.role(req);
 
-        sails.sockets.broadcast(gameName, 'setMove', { userSet: sails.sockets.getId(req), boxId: req.body.boxId, role: role });
-
+        if (role != 'Error') {
+            sails.sockets.broadcast(gameName, 'setMove', {
+                userSet: sails.sockets.getId(req),
+                boxId: req.body.boxId,
+                role: role
+            });
+        }
         return res.json({game: req.body.gameName});
     }
 };

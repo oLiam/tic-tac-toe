@@ -9,13 +9,13 @@ module.exports = {
     create: function (gameName) {
         if (!games[gameName]) {
             games[gameName] = {
-                users: []
+                users: [],
+                turn: ['X']
             };
         }
     },
 
     join: function (req) {
-        //if (games[req.body.gameName].users )
         games[req.body.gameName].users.push(sails.sockets.getId(req));
     },
 
@@ -26,10 +26,22 @@ module.exports = {
         var userO = games[gameName].users[1];
 
         if (userId == userX) {
-            return 'X';
+            if (games[gameName].turn[0] == 'X') {
+                games[gameName].turn[0] = 'O';
+                return 'X';
+            }
+            else {
+                return 'Error';
+            }
         }
         else if (userId == userO) {
-            return 'O';
+            if (games[gameName].turn[0] == 'O') {
+                games[gameName].turn[0] = 'X';
+                return 'O';
+            }
+            else {
+                return 'Error';
+            }
         }
     }
 };
