@@ -1,8 +1,6 @@
 function createGame() {
     io.socket.post('/create', function (resData, jwres) {
-        //render('lobby', {resData: resData}, function (html) {
-        //    document.body.innerHTML = html;
-        //});
+
     });
 }
 

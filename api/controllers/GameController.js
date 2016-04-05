@@ -20,18 +20,24 @@ module.exports = {
     },
 
     join: function (req, res) {
-        //req.session.userId = sails.sockets.getId(req);
+        req.session.gameId = req.body.gameName;
 
         sails.sockets.join(req, req.body.gameName,  function(err) {
             if (err) {
                 return res.serverError(err);
             }
-
-            return res.json({
-                message: 'joined game'
-            });
         });
 
         GameService.join(req);
+
+        return res.json({game: req.body.gameName});
+    },
+
+    set: function (req, res) {
+        var gameName = req.session.gameName;
+
+        sails.sockets.broadcast(gameName, 'setMove', { boxId: req.body.boxId });
+
+        return res.json({game: req.body.gameName});
     }
 };
