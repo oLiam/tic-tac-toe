@@ -1,12 +1,12 @@
 function setMove(boxId) {
-    if (document.getElementById(boxId).innerHTML == 'O') {
-        alert('Al bezet');
-        return;
-    }
-
-    if (document.getElementById(boxId).innerHTML == '') {
-        document.getElementById(boxId).innerHTML = 'O';
-    }
+    //if (document.getElementById(boxId).innerHTML == 'O') {
+    //    alert('Al bezet');
+    //    return;
+    //}
+    //
+    //if (document.getElementById(boxId).innerHTML == '') {
+    //    document.getElementById(boxId).innerHTML = 'O';
+    //}
 
     // X or O moet nog toegevoegd worden.
     io.socket.post('/set', {boxId: boxId}, function (resData, jwres) {
@@ -39,8 +39,15 @@ function check() {
     if( horizontalT == 'O' || horizontalM == 'O' || horizontalB == 'O' || verticalL == 'O' || verticalM == 'O' || verticalR == 'O' || diagonalTL == 'O' || diagonalTR == 'O') {
         alert('O gewonnen')
     }
+    else if( horizontalT == 'X' || horizontalM == 'X' || horizontalB == 'X' || verticalL == 'X' || verticalM == 'X' || verticalR == 'X' || diagonalTL == 'X' || diagonalTR == 'X') {
+        alert('X gewonnen')
+    }
 }
 
-io.socket.on('setMove', function (boxId){
-    document.getElementById(boxId).innerHTML == 'O';
+io.socket.on('setMove', function (data){
+    document.getElementById(data.boxId).innerHTML = data.role;
+console.log(req.session.id);
+    if(data.userSet == req.session.id) {
+        alert('alasdfas');
+    }
 });

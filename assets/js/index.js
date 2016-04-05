@@ -13,6 +13,5 @@ function joinGame(gameName) {
 }
 
 io.socket.on('newGame', function (game){
-    console.log(game.name);
     $('.games-list').append('<li onclick="joinGame('+"'"+ game.name +"'"+')">'+ game.name +'</li>');
 });

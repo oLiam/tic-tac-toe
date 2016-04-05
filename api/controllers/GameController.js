@@ -20,7 +20,7 @@ module.exports = {
     },
 
     join: function (req, res) {
-        req.session.gameId = req.body.gameName;
+        req.session.gameName = req.body.gameName;
 
         sails.sockets.join(req, req.body.gameName,  function(err) {
             if (err) {
@@ -36,7 +36,9 @@ module.exports = {
     set: function (req, res) {
         var gameName = req.session.gameName;
 
-        sails.sockets.broadcast(gameName, 'setMove', { boxId: req.body.boxId });
+        var role = GameService.role(req);
+
+        sails.sockets.broadcast(gameName, 'setMove', { userSet: sails.sockets.getId(req), boxId: req.body.boxId, role: role });
 
         return res.json({game: req.body.gameName});
     }

@@ -34,7 +34,8 @@ module.exports.routes = {
 
   '/': 'GameController.index',
   'POST /create': 'GameController.create',
-  'POST /join': 'GameController.join'
+  'POST /join': 'GameController.join',
+  'POST /set': 'GameController.set'
 
   /***************************************************************************
   *                                                                          *
