@@ -1,7 +1,6 @@
 function setMove(boxId) {
-    // X or O moet nog toegevoegd worden.
     io.socket.post('/set', {boxId: boxId}, function (resData, jwres) {
-
+        document.getElementById('error').innerHTML = resData.message;
     });
 
     check();
@@ -18,9 +17,9 @@ function check() {
     var box8 = document.getElementById('8').innerHTML;
     var box9 = document.getElementById('9').innerHTML;
 
-    var horizontalT = box1 && box3 && box5;
-    var horizontalM = box2 && box5 && box7;
-    var horizontalB = box3 && box7 && box9;
+    var horizontalT = box1 && box2 && box3;
+    var horizontalM = box4 && box5 && box6;
+    var horizontalB = box7 && box8 && box9;
     var verticalL = box1 && box4 && box7;
     var verticalM = box2 && box5 && box8;
     var verticalR = box3 && box6 && box9;
@@ -42,6 +41,6 @@ io.socket.on('setMove', function (data){
     else {
         document.getElementById('turn').innerHTML = 'O';
     }
-    
+    document.getElementById('error').innerHTML = '';
     document.getElementById(data.boxId).innerHTML = data.role;
 });

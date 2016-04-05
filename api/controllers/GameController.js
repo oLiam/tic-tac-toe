@@ -23,14 +23,20 @@ module.exports = {
         req.session.gameName = req.body.gameName;
 
         sails.sockets.join(req, req.body.gameName, function (err) {
-            if (err) {
-                return res.serverError(err);
-            }
+
         });
 
-        GameService.join(req);
+        var join = GameService.join(req);
+      console.log(join);
+        if (join == 'Game is full.') {
+            return res.json(500, { error: 'This game is full.' });
+        }
 
         return res.json({game: req.body.gameName});
+    },
+
+    leave: function (req, res) {
+
     },
 
     set: function (req, res) {
@@ -38,13 +44,18 @@ module.exports = {
 
         var role = GameService.role(req);
 
-        if (role != 'Error') {
+        if (role == 'Error') {
+            return res.json({message: 'Not your turn!'});
+        }
+        else if (role == 'Spectating') {
+            return res.json({message: 'You are spectating this game.'})
+        }
+        else {
             sails.sockets.broadcast(gameName, 'setMove', {
                 userSet: sails.sockets.getId(req),
                 boxId: req.body.boxId,
                 role: role
             });
         }
-        return res.json({game: req.body.gameName});
     }
 };

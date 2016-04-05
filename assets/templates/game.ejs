@@ -1,5 +1,8 @@
 <section class="content">
+    <h1><%- resData.game %></h1>
     <h2>Turn: Player <span id="turn">X</span></h2>
+    <h3 onclick="leave('<%= resData.game %>')">Leave</h3>
+    <span id="error"></span>
     <div class="row">
         <div class="box" id="1" onclick="setMove(this.id)"></div>
         <div class="box" id="2" onclick="setMove(this.id)"></div>
