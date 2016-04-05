@@ -1,0 +1,12 @@
+<div class="home">
+        <button type="button" onclick="createGame()">Create</button>
+
+        <div class="">
+                <h1>Games List</h1>
+                <ul class="games-list">
+                    <% _.forEach(games, function (game, key) { %>
+                    <li onclick="joinGame('<%= key %>')"> <%= key %></li>
+                    <% }); %>
+                </ul>
+        </div>
+</div>

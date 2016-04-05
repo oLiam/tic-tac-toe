@@ -1,0 +1,17 @@
+{
+    "restartable": "rs",
+    "verbose": true,
+    "ignore": [
+    ".tmp/**/*",
+    "views/**/*"
+],
+    "watch": [
+    "api/**/*",
+    "config/**/*",
+    "tasks/**/*",
+    ".sailsrc",
+    "app.js",
+    "Gruntfile.js",
+    "nodemon.json"
+]
+}

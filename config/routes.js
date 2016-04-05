@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  '/': 'GameController.index',
+  'POST /create': 'GameController.create',
+  'POST /join': 'GameController.join'
 
   /***************************************************************************
   *                                                                          *
