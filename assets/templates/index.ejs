@@ -1,17 +1,25 @@
-<div class="home">
-    <button type="button" onclick="createGame()">Create</button>
+<button type="button" onclick="createGame()">Create</button>
 
-    <span id="error"></span>
+<span id="error"></span>
 
-    <div class="">
-        <h1>Games List</h1>
-        <ul class="games-list">
+<div class="">
+    <h1>Games List</h1>
+    <ul class="games-list">
 
-            <% console.log(JSON.stringify(games)) %>
+        <% console.log(JSON.stringify(games)) %>
 
-            <% _.forEach(games, function (game, key) { %>
-            <li id="<%= key %>" onclick="joinGame('<%= key %>')"> <%= key %></li>
-            <% }); %>
-        </ul>
-    </div>
+        <% _.forEach(games, function (game, key) { %>
+        <li id="<%= key %>" onclick="joinGame('<%= key %>')"> <%= key %></li>
+        <% }); %>
+    </ul>
 </div>
+
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/ejs.min.js"></script>
+<script src="/js/dependencies/jquery-1.11.3.min.js"></script>
+<script src="/js/dependencies/render.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/play.js"></script>
+<!--SCRIPTS END-->

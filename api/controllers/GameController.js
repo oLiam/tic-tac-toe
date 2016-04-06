@@ -29,8 +29,9 @@ module.exports = {
     join: function (req, res) {
         req.session.gameName = req.body.gameName;
 
-        sails.sockets.join(req, req.body.gameName, function (err) {
+        console.log(req.session.gameName);
 
+        sails.sockets.join(req, req.body.gameName, function (err) {
         });
 
         var join = GameService.join(req);
@@ -39,7 +40,7 @@ module.exports = {
             return res.json(500, { error: 'This game is full.' });
         }
 
-        return res.json({game: req.body.gameName});
+        return res.json({game: req.body.gameName, role: join});
     },
 
     leave: function (req, res) {
@@ -50,10 +51,8 @@ module.exports = {
         req.session.gameName = '';
 
         sails.sockets.blast('deleteGame', {name: req.body.gameName});
-
-        var games = GameService.list();
-
-        return res.json({games: games});
+        
+        return res.redirect('');
     },
 
     set: function (req, res) {
@@ -68,6 +67,7 @@ module.exports = {
             return res.json({message: 'Please wait for someone to join the game.'})
         }
         else {
+            console.log(gameName);
             sails.sockets.broadcast(gameName, 'setMove', {
                 userSet: sails.sockets.getId(req),
                 boxId: req.body.boxId,

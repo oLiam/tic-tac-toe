@@ -20,9 +20,9 @@ function joinGame(gameName) {
 function leave(gameName) {
     io.socket.post('/leave', {gameName: gameName}, function (resData, jwres) {
 
-        render('index', {games: resData}, function (html) {
-            document.body.innerHTML = html;
-        });
+        //render('index', {games: resData}, function (html) {
+        //    document.body.innerHTML = html;
+        //});
     });
 }
 

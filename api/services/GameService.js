@@ -18,6 +18,8 @@ module.exports = {
                 turn: [random]
             };
         }
+
+        console.log(games);
     },
 
     delete: function (req) {
@@ -26,13 +28,24 @@ module.exports = {
 
     join: function (req) {
         if (games[req.body.gameName].users.length > 1) {
-            games[req.body.gameName].status = 1;
             return 'Game is full.'
         }
         if (games[req.body.gameName].users.length <= 1) {
             games[req.body.gameName].users.push(sails.sockets.getId(req));
+
+            if(games[req.body.gameName].users[0] == sails.sockets.getId(req)) {
+                var player = 'Player X';
+                var role = games[req.body.gameName].turn[0];
+                var res = [player, role];
+                return res;
+            }
+            else if(games[req.body.gameName].users[1] == sails.sockets.getId(req)) {
+                var player = 'Player O';
+                var role = games[req.body.gameName].turn[0];
+                var res = [player, role];
+                return res;
+            }
         }
-        console.log(games);
     },
 
     role: function (req) {
@@ -45,13 +58,9 @@ module.exports = {
         console.log(userId);
         console.log(games[gameName].users[1]);
         if (games[gameName].users[1] == null) {
-            console.log('2nd not user defined');
-
             return 'Wait';
         }
         else {
-            console.log('2nd is defined');
-
             if (userId == userX) {
                 if (games[gameName].turn[0] == 'X') {
                     games[gameName].turn[0] = 'O';
