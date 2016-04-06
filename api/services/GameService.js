@@ -5,7 +5,6 @@ module.exports = {
         return games;
     },
 
-    // Create game when the game name doesn't exists in the games array
     create: function (gameName) {
         if (!games[gameName]) {
             if (Math.random() >= 0.5) {
@@ -44,23 +43,32 @@ module.exports = {
 
         console.log(games);
         console.log(userId);
+        console.log(games[gameName].users[1]);
+        if (games[gameName].users[1] == null) {
+            console.log('2nd not user defined');
 
-        if (userId == userX) {
-            if (games[gameName].turn[0] == 'X') {
-                games[gameName].turn[0] = 'O';
-                return 'X';
-            }
-            else {
-                return 'Error';
-            }
+            return 'Wait';
         }
-        else if (userId == userO) {
-            if (games[gameName].turn[0] == 'O') {
-                games[gameName].turn[0] = 'X';
-                return 'O';
+        else {
+            console.log('2nd is defined');
+
+            if (userId == userX) {
+                if (games[gameName].turn[0] == 'X') {
+                    games[gameName].turn[0] = 'O';
+                    return 'X';
+                }
+                else {
+                    return 'Error';
+                }
             }
-            else {
-                return 'Error';
+            else if (userId == userO) {
+                if (games[gameName].turn[0] == 'O') {
+                    games[gameName].turn[0] = 'X';
+                    return 'O';
+                }
+                else {
+                    return 'Error';
+                }
             }
         }
     }

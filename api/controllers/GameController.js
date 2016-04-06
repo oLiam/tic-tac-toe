@@ -64,8 +64,8 @@ module.exports = {
         if (role == 'Error') {
             return res.json({message: 'Not your turn!'});
         }
-        else if (role == 'Spectating') {
-            return res.json({message: 'You are spectating this game.'})
+        else if (role == 'Wait') {
+            return res.json({message: 'Please wait for someone to join the game.'})
         }
         else {
             sails.sockets.broadcast(gameName, 'setMove', {

@@ -1,15 +1,13 @@
-<div class="home">
-    <button type="button" onclick="createGame()">Create</button>
+<button type="button" onclick="createGame()">Create</button>
 
-    <span id="error"></span>
+<span id="error"></span>
 
-    <div class="">
-        <h1>Games List</h1>
-        <ul class="games-list">
-            <% console.log(JSON.stringify(games)) %>
-            <% _.forEach(games, function (game, key) { %>
-            <li id="<%= key %>" onclick="joinGame('<%= key %>')"> <%= key %></li>
-            <% }); %>
-        </ul>
-    </div>
+<div class="">
+    <h1>Games List</h1>
+    <ul class="games-list">
+        <% console.log(JSON.stringify(games)) %>
+        <% _.forEach(games, function (game, key) { %>
+        <li id="<%= key %>" onclick="joinGame('<%= key %>')"> <%= key %></li>
+        <% }); %>
+    </ul>
 </div>

@@ -32,12 +32,17 @@ function check() {
         box9 = document.getElementById('9').innerHTML;
 
     if (box1 == 'O' && box2 == 'O' && box3 == 'O' || box4 == 'O' && box5 == 'O' && box6 == 'O' || box7 == 'O' && box8 == 'O' && box9 == 'O' || box1 == 'O' && box4 == 'O' && box7 == 'O' || box2 == 'O' && box5 == 'O' && box8 == 'O' || box3 == 'O' && box6 == 'O' && box9 == 'O' || box1 == 'O' && box5 == 'O' && box9 == 'O' || box3 == 'O' && box5 == 'O' && box7 == 'O') {
-        alert('O gewonnen');
+        alert('Player O won :)');
 
         leave(currentGame);
     }
     else if (box1 == 'X' && box2 == 'X' && box3 == 'X' || box4 == 'X' && box5 == 'X' && box6 == 'X' || box7 == 'X' && box8 == 'X' && box9 == 'X' || box1 == 'X' && box4 == 'X' && box7 == 'X' || box2 == 'X' && box5 == 'X' && box8 == 'X' || box3 == 'X' && box6 == 'X' && box9 == 'X' || box1 == 'X' && box5 == 'X' && box9 == 'X' || box3 == 'X' && box5 == 'X' && box7 == 'X') {
-        alert('X gewonnen');
+        alert('Player X won :)');
+
+        leave(currentGame);
+    }
+    else if(box1 != '' && box2 != '' && box3 != '' && box4 != '' && box5 != '' && box6 != '' && box7 != '' && box8 != '' && box9 != '') {
+        alert('Tie :(');
 
         leave(currentGame);
     }
