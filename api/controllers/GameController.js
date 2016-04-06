@@ -12,6 +12,13 @@ module.exports = {
         return res.view('index', {games: games});
     },
 
+    lobby: function (req, res) {
+        var games = GameService.list();
+
+        console.log('we zijn hiet wer');
+        return res.json({games: games});
+    },
+
     create: function (req, res) {
         var gameName = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 4);
         GameService.create(gameName);
@@ -27,7 +34,7 @@ module.exports = {
         });
 
         var join = GameService.join(req);
-      console.log(join);
+
         if (join == 'Game is full.') {
             return res.json(500, { error: 'This game is full.' });
         }
@@ -36,7 +43,17 @@ module.exports = {
     },
 
     leave: function (req, res) {
+        sails.sockets.leaveAll(req.body.gameName);
 
+        GameService.delete(req);
+
+        req.session.gameName = '';
+
+        sails.sockets.blast('deleteGame', {name: req.body.gameName});
+
+        var games = GameService.list();
+
+        return res.json({games: games});
     },
 
     set: function (req, res) {

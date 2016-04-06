@@ -12,18 +12,17 @@ module.exports = {
                 var random = 'X';
             }
             else {
-                var random = 'Y';
+                var random = 'O';
             }
             games[gameName] = {
                 users: [],
-                turn: [random],
-                status: ['0']
+                turn: [random]
             };
         }
     },
 
     delete: function (req) {
-
+        delete games[req.body.gameName];
     },
 
     join: function (req) {
@@ -32,9 +31,7 @@ module.exports = {
             return 'Game is full.'
         }
         if (games[req.body.gameName].users.length <= 1) {
-            if (games[req.body.gameName].status == '0') {
-                games[req.body.gameName].users.push(sails.sockets.getId(req));
-            }
+            games[req.body.gameName].users.push(sails.sockets.getId(req));
         }
         console.log(games);
     },
@@ -46,6 +43,7 @@ module.exports = {
         var userO = games[gameName].users[1];
 
         console.log(games);
+        console.log(userId);
 
         if (userId == userX) {
             if (games[gameName].turn[0] == 'X') {
