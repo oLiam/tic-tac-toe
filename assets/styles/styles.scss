@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 html, body {
-  background-color: #77C4F2;
+  background-color: #FDC830;
   font-family: 'Montserrat', sans-serif;
   position: relative;
   height: 100%;
@@ -13,20 +13,25 @@ html, body {
   text-align: center;
 }
 
+.wrapper {
+  width: 368px;
+  margin: 20px auto;
+}
+
 .row {
-  padding: 10px;
+  display: inline-block;
+  margin-bottom: -4px;
 }
 
 .box {
   display: inline-block;
   width: 100px;
   height: 100px;
-  background-color: #00A000;
   padding: 10px;
-  float: left;
-  margin-left: 15px;
-  line-height: 80px;
+  line-height: 100px;
   font-size: 50px;
+  float: left;
+  color: white;
 }
 
 #error {
@@ -57,4 +62,59 @@ button {
   li {
     padding-top: 10px;
   }
+}
+
+.box-1 {
+  border-bottom: 2px white solid;
+  border-right: 2px white solid;
+}
+
+.box-2 {
+  border-bottom: 2px white solid;
+  border-right: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.box-3 {
+  border-bottom: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.box-4 {
+  border-top: 2px white solid;
+  border-bottom: 2px white solid;
+  border-right: 2px white solid;
+}
+
+.box-5 {
+  border-top: 2px white solid;
+  border-bottom: 2px white solid;
+  border-right: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.box-6 {
+  border-top: 2px white solid;
+  border-bottom: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.box-7 {
+  border-top: 2px white solid;
+  border-right: 2px white solid;
+}
+
+.box-8 {
+  border-top: 2px white solid;
+  border-right: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.box-9 {
+  border-top: 2px white solid;
+  border-left: 2px white solid;
+}
+
+.clearfix {
+  clear: both;
 }
