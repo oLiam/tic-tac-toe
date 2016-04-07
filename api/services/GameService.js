@@ -18,8 +18,6 @@ module.exports = {
                 turn: [random]
             };
         }
-
-        console.log(games);
     },
 
     delete: function (req) {
@@ -54,9 +52,6 @@ module.exports = {
         var userX = games[gameName].users[0];
         var userO = games[gameName].users[1];
 
-        console.log(games);
-        console.log(userId);
-        console.log(games[gameName].users[1]);
         if (games[gameName].users[1] == null) {
             return 'Wait';
         }

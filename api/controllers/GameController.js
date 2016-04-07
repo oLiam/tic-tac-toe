@@ -12,15 +12,9 @@ module.exports = {
         return res.view('index', {games: games});
     },
 
-    lobby: function (req, res) {
-        var games = GameService.list();
-
-        console.log('we zijn hiet wer');
-        return res.json({games: games});
-    },
-
     create: function (req, res) {
         var gameName = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 4);
+
         GameService.create(gameName);
 
         sails.sockets.blast('newGame', {name: gameName});
@@ -28,8 +22,6 @@ module.exports = {
 
     join: function (req, res) {
         req.session.gameName = req.body.gameName;
-
-        console.log(req.session.gameName);
 
         sails.sockets.join(req, req.body.gameName, function (err) {
         });
@@ -48,10 +40,12 @@ module.exports = {
 
         GameService.delete(req);
 
+        sails.sockets.blast('deleteGame', {name: req.body.gameName});
+
+        sails.sockets.broadcast(req.body.gameName, 'leaveGame', { gameName: req.body.gameName });
+
         req.session.gameName = '';
 
-        sails.sockets.blast('deleteGame', {name: req.body.gameName});
-        
         return res.redirect('');
     },
 
@@ -67,7 +61,6 @@ module.exports = {
             return res.json({message: 'Please wait for someone to join the game.'})
         }
         else {
-            console.log(gameName);
             sails.sockets.broadcast(gameName, 'setMove', {
                 userSet: sails.sockets.getId(req),
                 boxId: req.body.boxId,
