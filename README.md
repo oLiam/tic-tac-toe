@@ -1,3 +1,3 @@
-# tic-tac-toe
+# Tic Tac Toe
 
-a [Sails](http://sailsjs.org) application
+Web socket based 'multiplayer' Tic Tac Toe game built with Sails.js
